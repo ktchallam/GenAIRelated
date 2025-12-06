@@ -16,6 +16,18 @@ mcp = FastMCP("My Awesome Server")
 #     return a + b
 
 @mcp.tool
+def get_TopStocks_sectordata(Industry: str) -> list:  # Capital 'I'
+    """Return all data from clientmetadata.csv as a list of dicts"""
+    data = []
+    with open("./indian_stocks_comprehensive.csv", newline='', encoding='utf-8') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            print(row["Industry"])
+            if row["Industry"].strip() == Industry.strip():
+                data.append(row)          
+    return data
+
+@mcp.tool
 def get_client_metadata(ClientId: str) -> list:
     """Return all data from clientmetadata.csv as a list of dicts"""
     data = []
